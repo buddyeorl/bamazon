@@ -10,9 +10,9 @@ var connection = mysql.createConnection({
 });
  
 connection.connect();
- 
+
 connection.query('SELECT * FROM bamazonDB.products;', function (error, results, fields) {
-  if (error) throw error;
+	if (error) throw error;
   	console.log('Fields are ', fields);
   	console.log('The solution is: ', results);
  	globalInfo = results;
@@ -20,25 +20,15 @@ connection.query('SELECT * FROM bamazonDB.products;', function (error, results, 
 	console.log(" ITEMS FOR SALE:")
 	for (var i=0; i<results.length;i++)
 	{
-	menuItemsForSale[i]=results[i].product_name;
-	console.log("item " + i + " : " +results[i].product_name + "   Price: $" + results[i].price);
-	if (i===(results.length - 1))
-	{
-		addLine(2);
-		firstMenu();
+		menuItemsForSale[i]=results[i].product_name;
+		console.log("item " + i + " : " +results[i].product_name + "   Price: $" + results[i].price);
+		if (i===(results.length - 1))
+		{
+			addLine(2);
+			firstMenu();
+		}
 	}
-	}
-
-})
-// connection.query("UPDATE `bamazonDB`.`products` SET `stock_quantity`='87' WHERE `item_id`='4';", function (error, results, fields) {
-//  	if (error) throw error;
-//  	console.log('The solution is: ', results);
-// });
-
-
-
- 
-//connection.end();
+});
 
 function updateQty(itemQty, itemName)
 {
@@ -47,8 +37,6 @@ connection.query("UPDATE `bamazonDB`.`products` SET `stock_quantity`='"+ itemQty
 });	
 connection.end();
 }
-
-
 
 function addLine(howMany)
 {
@@ -108,6 +96,3 @@ function howManyMenu(itemToPurchase)
 		}
 	});	
 }
-
-
-
